@@ -12,6 +12,9 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final titleControler = TextEditingController();
+  final valueControler = TextEditingController();
+
   final _transaction = [
     Transaction(
         id: 't1',
@@ -34,7 +37,6 @@ class MyHomePage extends StatelessWidget {
           title: Text('Despesas Pessoais'),
         ),
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
@@ -85,6 +87,39 @@ class MyHomePage extends StatelessWidget {
                   );
                 }).toList(),
               ),
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: <Widget>[
+                      TextField(
+                        controller: titleControler,
+                        decoration: InputDecoration(labelText: 'Título'),
+                      ),
+                      TextField(
+                        controller: valueControler,
+                        decoration: InputDecoration(
+                          labelText: 'Valor (R\$)',
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FlatButton(
+                            child: Text('Nova Transação'),
+                            textColor: Colors.purple,
+                            onPressed: () {
+                              print(titleControler.text);
+                              print(valueControler.text);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ]));
   }
 }
